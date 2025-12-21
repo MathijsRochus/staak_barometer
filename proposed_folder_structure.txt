@@ -1,0 +1,17 @@
+/mijn-staak-app
+├── .streamlit/
+│   └── secrets.toml
+├── .gitignore
+├── requirements.txt
+├── main.py                <-- Je enige startpunt (De "Controller")
+└── src/
+    ├── backend/           <-- Alle database logica
+    │   ├── client.py      <-- De connectie setup
+    │   └── service.py     <-- Functies zoals get_events(), login(), add_event()
+    ├── views/             <-- De pagina's (Front-end)
+    │   ├── login.py
+    │   ├── home.py
+    │   ├── detail.py
+    │   └── admin.py       <-- NIEUW
+    └── utils/             <-- Hulpbestanden
+        └── text.py        <-- Je vertalingen (UI_TRANSLATIONS)
