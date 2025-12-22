@@ -21,9 +21,6 @@ def render_home():
     if 'user' in st.session_state and st.session_state.user:
         user_email = st.session_state.user.email
     
-    # DEBUG (Optioneel: verwijder de '#' hieronder als je je email wilt zien om te testen)
-    # st.sidebar.write(f"Ingelogd als: {user_email}")
-
     # Als het emailadres klopt, toon de knop
     if user_email == "mathijs.rochus@outlook.com":
         st.sidebar.divider()
@@ -65,6 +62,14 @@ def render_home():
         title = event['title'].get(lang, event['title'].get('nl', 'Geen titel'))
         desc = event['description'].get(lang, event['description'].get('nl', ''))
         
+        # Sector logica: check of het JSON is of oude text
+        raw_sector = event['sector']
+        if isinstance(raw_sector, dict):
+            sector_display = raw_sector.get(lang, raw_sector.get('nl', 'Onbekend'))
+        else:
+            sector_display = str(raw_sector)
+        
+        # Stemstatus bepalen
         has_voted = event['id'] in voted_event_ids
         status_label = get_text("status_voted") if has_voted else get_text("status_not_voted")
         
@@ -73,7 +78,7 @@ def render_home():
             col1, col2 = st.columns([3, 1])
             with col1:
                 st.subheader(f"{event['date']} - {title}")
-                st.caption(f"{get_text('lbl_sector')}: {event['sector']}")
+                st.caption(f"{get_text('lbl_sector')}: {sector_display}")
                 st.write(desc)
             with col2:
                 # Status indicatie

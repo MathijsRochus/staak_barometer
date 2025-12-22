@@ -25,9 +25,16 @@ def render_detail():
     # 3. Details tonen
     title = event['title'].get(lang, event['title'].get('nl'))
     desc = event['description'].get(lang, event['description'].get('nl'))
+    
+    # Sector logica: check of het JSON is of oude text
+    raw_sector = event['sector']
+    if isinstance(raw_sector, dict):
+        sector_display = raw_sector.get(lang, raw_sector.get('nl', ''))
+    else:
+        sector_display = str(raw_sector)
 
     st.title(title)
-    st.markdown(f"**{get_text('lbl_date')}:** {event['date']} | **{get_text('lbl_sector')}:** {event['sector']}")
+    st.markdown(f"**{get_text('lbl_date')}:** {event['date']} | **{get_text('lbl_sector')}:** {sector_display}")
     st.info(desc)
     
     st.divider()
