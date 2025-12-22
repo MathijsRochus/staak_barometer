@@ -1,6 +1,9 @@
 import streamlit as st
 from src.utils.text import get_text
 from src.backend.service import get_live_events, get_user_votes
+from src.utils.ui import load_custom_css
+from PIL import Image # <--- VOEG DIT TOE bovenaan bij je imports
+
 
 def render_home():
     # --- SIDEBAR ---
@@ -25,11 +28,20 @@ def render_home():
     # --- MAIN CONTENT ---
     st.title(get_text("header_events"))
     st.write(get_text("sub_events"))
-    
-    # 1. Data ophalen
+
+    # 1. Config
+    # Laad het logo in het geheugen
+    logo_img = Image.open("src/assets/logo.png")
+
+    st.set_page_config(
+    page_title="De Staak Barometer", 
+    page_icon=logo_img,  # <--- HIER GEBRUIK JE DE AFBEELDING
+    layout="centered"
+    )
+    # 2. Data ophalen
     events = get_live_events()
     
-    # 2. Checken of er user votes zijn (zodat we kunnen zien of je al gestemd hebt)
+    # 3. Checken of er user votes zijn (zodat we kunnen zien of je al gestemd hebt)
     # We halen de user uit de sessie als die bestaat
     user_votes = []
     if 'user' in st.session_state:
@@ -41,7 +53,7 @@ def render_home():
     if not events:
         st.info("Er zijn momenteel geen actieve stakingsevenementen gevonden in de database.")
 
-    # 3. De Loop (Hier worden de blokjes getekend)
+    # 4. De Loop (Hier worden de blokjes getekend)
     for event in events:
         # JSONB parsen: haal de juiste taal op, of fallback naar NL
         title = event['title'].get(lang, event['title'].get('nl', 'Geen titel'))

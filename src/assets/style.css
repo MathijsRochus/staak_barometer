@@ -1,0 +1,64 @@
+/* --- GLOBAL FONTS & STYLE --- */
+/* We gebruiken een systeem-font stack voor snelle laadtijden, maar strak */
+html, body, [class*="css"] {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+/* --- TITELS --- */
+/* Maak de titels krachtiger en meer 'nieuws' achtig */
+h1 {
+    font-weight: 800 !important;
+    color: #1E1E1E !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 4px solid #FF4B4B; /* De rode streep onder de titel */
+    padding-bottom: 10px;
+}
+
+h2, h3 {
+    font-weight: 700 !important;
+    color: #333333 !important;
+}
+
+/* --- KNOPPEN (BUTTONS) --- */
+/* Maak de knoppen wat moderner en minder standaard */
+.stButton button {
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+}
+
+/* Primary buttons (rood) een schaduw geven */
+.stButton button[kind="primary"] {
+    box-shadow: 0 4px 6px rgba(255, 75, 75, 0.2);
+}
+
+.stButton button:hover {
+    transform: translateY(-2px); /* Klein hupje bij hover */
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+/* --- CARDS / CONTAINERS --- */
+/* Geef de st.container (die border=True heeft) een subtiele schaduw */
+[data-testid="stVerticalBlock"] > [style*="border"] {
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 10px !important;
+    background-color: white;
+}
+
+/* --- METRICS / CIJFERS --- */
+/* Als je metrics gebruikt, maak de cijfers groot en rood */
+[data-testid="stMetricValue"] {
+    font-size: 2rem !important;
+    color: #FF4B4B !important;
+    font-weight: 700 !important;
+}
+
+/* --- MENU VERBERGEN (APP FEEL) --- */
+/* Verbergt het standaard Streamlit menu rechtsboven en de footer */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
