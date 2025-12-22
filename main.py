@@ -22,7 +22,7 @@ except FileNotFoundError:
     icon_image = "📊"
 
 st.set_page_config(
-    page_title="De Staak Barometer", 
+    page_title="De Staakbarometer-de-grève", 
     page_icon=icon_image, 
     layout="centered"
 )

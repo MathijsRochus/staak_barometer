@@ -24,16 +24,18 @@ def render_home():
     # Als het emailadres klopt, toon de knop
     if user_email == "mathijs.rochus@outlook.com":
         st.sidebar.divider()
-        if st.sidebar.button("⚙️ Admin Panel", use_container_width=True):
+        if st.sidebar.button("⚙️ Admin Panel", width='stretch'):
             st.session_state.page = 'admin'
             st.rerun()
     
     st.sidebar.divider()
 
     # Logout knop
-    if st.sidebar.button(get_text("btn_logout"), use_container_width=True):
-        if 'session' in st.session_state: del st.session_state.session
-        if 'user' in st.session_state: del st.session_state.user
+    if st.sidebar.button(get_text("btn_logout"), width='stretch'):
+        if 'session' in st.session_state:
+            del st.session_state.session
+        if 'user' in st.session_state:
+            del st.session_state.user
         st.session_state.page = 'login'
         st.rerun()
 
@@ -88,7 +90,7 @@ def render_home():
                     st.write(f"**{status_label}**")
                 
                 # De actieknop
-                if st.button(get_text("btn_view_vote"), key=f"btn_{event['id']}", use_container_width=True):
+                if st.button(get_text("btn_view_vote"), key=f"btn_{event['id']}", width='stretch'):
                     st.session_state.selected_event = event
                     st.session_state.page = 'detail'
                     st.rerun()

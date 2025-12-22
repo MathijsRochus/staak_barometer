@@ -41,11 +41,11 @@ def get_event_stats(event_id):
     except Exception:
         return []
 
-def create_event(date, sector, title_json, desc_json):
+def create_event(date, sector_json, title_json, desc_json):
     # Hier voegen we het event toe aan de DB
     supabase.table("events").insert({
         "date": str(date),
-        "sector": sector,
+        "sector": sector_json,
         "title": title_json,
         "description": desc_json
     }).execute()

@@ -13,9 +13,9 @@ def render_login():
         # Probeer het logo te tonen. 
         # Zorg dat src/assets/logo.png bestaat, anders vangt 'try' dit op.
         try:
-            # AANGEPAST: We gebruiken use_container_width=True in plaats van fixed width.
+            # AANGEPAST: We gebruiken width='stretch' in plaats van fixed width.
             # Omdat de kolom nu smal en gecentreerd is, staat het logo nu ook in het midden.
-            st.image("src/assets/logo.png", use_container_width=True)
+            st.image("src/assets/logo.png", width='stretch')
         except Exception:
             # Fallback als het plaatje ontbreekt (bv. tijdens development)
             st.markdown("<h1 style='text-align: center;'>📊</h1>", unsafe_allow_html=True)
@@ -40,7 +40,7 @@ def render_login():
             with st.form("login_form"):
                 email_l = st.text_input("Email", key="login_email")
                 pass_l = st.text_input("Password", type="password", key="login_pass")
-                submitted_l = st.form_submit_button(get_text("btn_login"), use_container_width=True)
+                submitted_l = st.form_submit_button(get_text("btn_login"), width='stretch')
                 
                 if submitted_l:
                     if email_l and pass_l:
@@ -75,7 +75,7 @@ def render_login():
                 # Het tweede wachtwoord veld ter bevestiging
                 pass_r2 = st.text_input(get_text("lbl_password_confirm"), type="password", key="reg_p2")
                 
-                submitted_r = st.form_submit_button(get_text("btn_register"), use_container_width=True)
+                submitted_r = st.form_submit_button(get_text("btn_register"), width='stretch')
                 
                 if submitted_r:
                     # 1. Check of velden gevuld zijn

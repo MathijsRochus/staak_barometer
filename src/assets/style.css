@@ -1,72 +1,107 @@
 /* Bestandsnaam: src/assets/style.css */
 
+/* --- BRAND COLORS (Uit de HTML) --- */
 :root {
-    /* --- KLEURENPALET --- */
-    --primary-color: #A8E6CF;  /* Mintgroen */
-    --text-dark: #1a1523;      /* Donker paars/zwart */
-    
-    /* AANGEPAST: Donkerdere achtergrond (grijs-blauw) */
-    --bg-light: #cbd5e1;       
-    
-    /* AANGEPAST: Donkerdere randen voor de cards */
-    --border-color: #94a3b8;   
+    --color-mint: #A8E6CF; 
+    --color-dark: #1a1523;
+    --color-dark-light: #2d2438;
+    --bg-color: #f8fafc;        /* Lichte achtergrond zoals in HTML */
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
 }
 
-/* --- GLOBAL FONTS & STYLE --- */
-html, body, [class*="css"] {
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    color: var(--text-dark);
-    background-color: var(--bg-light); /* Forceer body kleur */
+/* --- APP BACKGROUND & FONTS --- */
+.stApp {
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--color-dark);
 }
 
-/* --- TITELS --- */
+/* --- HEADERS (Poppins Font) --- */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif !important;
+    color: var(--color-dark) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+}
+
 h1 {
-    font-weight: 800 !important;
-    color: var(--text-dark) !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 4px solid var(--primary-color);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: none !important; /* Rode lijn weggehaald, cleanere look */
+    margin-bottom: 1rem;
 }
 
-h2, h3 {
-    font-weight: 700 !important;
-    color: var(--text-dark) !important;
-}
-
-/* --- KNOPPEN (BUTTONS) --- */
-.stButton button {
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    border: none !important;
-    transition: all 0.2s ease !important;
-}
-
-.stButton button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* --- CONTAINERS / CARDS --- */
-/* De witte blokken waar de content in staat */
+/* --- CARDS / CONTAINERS --- */
+/* De witte blokken met ronde hoeken */
 [data-testid="stVerticalBlock"] > [style*="border"] {
+    background-color: var(--card-bg);
     border: 1px solid var(--border-color) !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Iets zwaardere schaduw */
-    border-radius: 12px !important;
-    background-color: white;
+    border-radius: 1rem !important; /* rounded-xl */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); /* shadow-sm */
     padding: 1.5rem !important;
 }
 
-/* --- STATUS LABELS --- */
+/* --- BUTTONS --- */
+/* Standaard knop (Secundair in HTML: wit met rand) */
+.stButton button {
+    background-color: white !important;
+    color: var(--color-dark) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 0.75rem !important; /* rounded-xl */
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.stButton button:hover {
+    border-color: var(--color-mint) !important;
+    background-color: #f8fafc !important;
+    color: var(--color-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Primaire knop (Mintgroen zoals in HTML) */
+/* Gebruik in python: st.button("Tekst", type="primary") */
+.stButton button[kind="primary"] {
+    background-color: var(--color-mint) !important;
+    color: var(--color-dark) !important;
+    border: 1px solid var(--color-mint) !important;
+    box-shadow: 0 2px 4px rgba(168, 230, 207, 0.4);
+}
+
+.stButton button[kind="primary"]:hover {
+    background-color: #97dcb8 !important; /* Iets donkerder mint bij hover */
+    box-shadow: 0 4px 12px rgba(168, 230, 207, 0.6);
+}
+
+/* --- STATUS PILLS --- */
+/* Voor de labels "Gestemd" etc. */
 .status-pill {
-    background-color: var(--primary-color);
-    color: var(--text-dark);
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-weight: bold;
-    font-size: 0.8rem;
     display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-voted {
+    background-color: var(--color-dark);
+    color: white;
+}
+
+.status-open {
+    background-color: var(--color-mint);
+    color: var(--color-dark);
+}
+
+/* --- NOTIFICATIES --- */
+.stAlert {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
 }
 
 /* --- MENU VERBERGEN --- */

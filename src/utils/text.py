@@ -3,7 +3,7 @@ import streamlit as st
 # De grote dictionary
 UI_TRANSLATIONS = {
     "nl": {
-        "title": "📊 De Staak Barometer",
+        "title": "📊 De Staakbarometer",
         "welcome_msg": "Welkom! Laat uw stem horen. Bent u de stille meerderheid?",
         "username_placeholder": "Email adres...",
         "btn_login": "Inloggen / Registreren",

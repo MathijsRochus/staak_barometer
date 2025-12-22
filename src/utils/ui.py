@@ -14,11 +14,8 @@ def get_base64_of_bin_file(bin_file):
 
 def load_local_css(file_name):
     """Leest CSS bestand in met een robuust pad."""
-    # Bepaal de map waar DIT bestand (ui.py) staat
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Ga één map omhoog (naar src) en dan naar assets
     file_path = os.path.join(current_dir, "..", "assets", file_name)
-    
     try:
         with open(file_path, "r") as f:
             return f.read()
@@ -31,27 +28,30 @@ def render_header():
     # 1. Laad de CSS (style.css)
     css_content = load_local_css("style.css")
     
-    # 2. Bepaal pad naar logo voor de HTML (ook robuust)
+    # 2. Bepaal pad naar logo 
     current_dir = os.path.dirname(os.path.abspath(__file__))
     logo_path = os.path.join(current_dir, "..", "assets", "logo.png")
     logo_b64 = get_base64_of_bin_file(logo_path)
 
     # 3. Bouw de style string en injecteer deze
+    # We voegen hier de @import voor de fonts toe!
     custom_css = f"""
     <style>
+        /* Import Google Fonts: Inter & Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;700;800&display=swap');
+
         {css_content}
         
-        /* Specifieke CSS voor de logo container (python-logica) */
+        /* Logo Container (Links) */
         .logo-container {{
             position: fixed;
             top: 2.5rem;
-            left: 2rem;       /* Logo staat nu LINKS */
-            right: auto;
+            left: 2rem;
             z-index: 999;
-            width: 80px;      /* Pas grootte aan naar wens */
+            width: 80px;
         }}
 
-        /* Zorg dat de inhoud niet achter het logo verdwijnt op grote schermen */
+        /* Responsive padding */
         @media (min-width: 800px) {{
             .main .block-container {{
                 padding-left: 5rem; 
@@ -61,7 +61,7 @@ def render_header():
     """
     st.markdown(custom_css, unsafe_allow_html=True)
 
-    # 4. Toon het logo in de HTML container
+    # 4. Toon het logo
     if logo_b64:
         st.markdown(
             f"""
