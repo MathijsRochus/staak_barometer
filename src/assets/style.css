@@ -1,88 +1,41 @@
-/* Bestandsnaam: src/assets/style.css */
-
 :root {
-    /* --- KLEURENPALET --- */
-    /* Pas deze codes aan aan jouw logo */
-    --primary-color: #A8E6CF;  /* Mintgroen (Accent) */
-    --text-dark: #1a1523;      /* Donker (Titels/Tekst) */
-    --text-light: #ffffff;     /* Wit */
-    --bg-light: #f8fafc;       /* Achtergrond */
-    --border-color: #e2e8f0;   /* Lichte lijnen */
+    --primary-color: #A8E6CF;
+    --text-dark: #1a1523;
+    --bg-light: #f8fafc;
+    --border-color: #e2e8f0;
 }
 
-/* --- GLOBAL FONTS & STYLE --- */
 html, body, [class*="css"] {
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     color: var(--text-dark);
 }
 
-/* --- TITELS --- */
 h1 {
-    font-weight: 800 !important;
     color: var(--text-dark) !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    /* De streep onder de titel in de accentkleur */
-    border-bottom: 4px solid var(--primary-color); 
+    border-bottom: 4px solid var(--primary-color);
     padding-bottom: 10px;
-    margin-bottom: 20px;
 }
 
-h2, h3 {
-    font-weight: 700 !important;
-    color: var(--text-dark) !important;
-}
-
-/* --- KNOPPEN (BUTTONS) --- */
+/* Knoppen styling */
 .stButton button {
     border-radius: 8px !important;
     font-weight: 700 !important;
-    transition: all 0.3s ease !important;
     border: none !important;
+    transition: transform 0.2s;
 }
 
-/* Primaire knoppen (Mint) */
-/* We targeten de specifieke Streamlit buttons */
 .stButton button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Als je secondary buttons (wit) gebruikt */
-button[kind="secondary"] {
-    background-color: white !important;
-    color: var(--text-dark) !important;
-    border: 1px solid var(--border-color) !important;
-}
-
-/* --- CONTAINERS / CARDS --- */
-/* De blokken waar de events in staan */
+/* Cards / Containers */
 [data-testid="stVerticalBlock"] > [style*="border"] {
     border: 1px solid var(--border-color) !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     background-color: white;
-    padding: 1.5rem !important;
 }
 
-/* --- METRICS & STATUS --- */
-/* Grote cijfers of status tekst */
-[data-testid="stMetricValue"] {
-    color: var(--text-dark) !important;
-}
-
-/* Status labels (bv. "Gestemd") een kleur geven */
-.status-pill {
-    background-color: var(--primary-color);
-    color: var(--text-dark);
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-weight: bold;
-    font-size: 0.8rem;
-    display: inline-block;
-}
-
-/* --- MENU VERBERGEN --- */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+/* Menu verbergen */
+#MainMenu, footer, header {visibility: hidden;}

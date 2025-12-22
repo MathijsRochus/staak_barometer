@@ -61,7 +61,7 @@ elif st.session_state.page == 'admin':
     user_email = st.session_state.user.email if 'user' in st.session_state else ""
     
     # Pas dit emailadres aan naar jouw admin email
-    if user_email != "mathijs@qargo.com": 
+    if user_email != "mathijs.rochus@outlook.com": 
         st.error("Geen toegang.")
         st.session_state.page = 'home'
         st.rerun()
