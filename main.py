@@ -12,7 +12,7 @@ from src.views.admin import render_admin
 from src.utils.ui import render_header
 
 # 1. Config
-st.set_page_config(page_title="De Staak Barometer", page_icon="📊", layout="centered")
+st.set_page_config(page_title="De Staak Barometer", page_icon="logo.png", layout="centered")
 
 # 2. Global State Init
 if 'page' not in st.session_state: st.session_state.page = 'login'
