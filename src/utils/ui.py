@@ -27,6 +27,7 @@ def load_local_css(file_name):
         return ""
 
 def render_header():
+    """Renders de globale header styling en het logo."""
     # 1. Laad de CSS (style.css)
     css_content = load_local_css("style.css")
     
@@ -44,9 +45,17 @@ def render_header():
         .logo-container {{
             position: fixed;
             top: 2.5rem;
-            right: 2rem;
+            left: 2rem;       /* Logo staat nu LINKS */
+            right: auto;
             z-index: 999;
-            width: 80px;
+            width: 80px;      /* Pas grootte aan naar wens */
+        }}
+
+        /* Zorg dat de inhoud niet achter het logo verdwijnt op grote schermen */
+        @media (min-width: 800px) {{
+            .main .block-container {{
+                padding-left: 5rem; 
+            }}
         }}
     </style>
     """

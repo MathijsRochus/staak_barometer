@@ -1,41 +1,75 @@
+/* Bestandsnaam: src/assets/style.css */
+
 :root {
-    --primary-color: #A8E6CF;
-    --text-dark: #1a1523;
-    --bg-light: #f8fafc;
-    --border-color: #e2e8f0;
+    /* --- KLEURENPALET --- */
+    --primary-color: #A8E6CF;  /* Mintgroen */
+    --text-dark: #1a1523;      /* Donker paars/zwart */
+    
+    /* AANGEPAST: Donkerdere achtergrond (grijs-blauw) */
+    --bg-light: #cbd5e1;       
+    
+    /* AANGEPAST: Donkerdere randen voor de cards */
+    --border-color: #94a3b8;   
 }
 
+/* --- GLOBAL FONTS & STYLE --- */
 html, body, [class*="css"] {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     color: var(--text-dark);
+    background-color: var(--bg-light); /* Forceer body kleur */
 }
 
+/* --- TITELS --- */
 h1 {
+    font-weight: 800 !important;
     color: var(--text-dark) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     border-bottom: 4px solid var(--primary-color);
     padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-/* Knoppen styling */
+h2, h3 {
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+}
+
+/* --- KNOPPEN (BUTTONS) --- */
 .stButton button {
     border-radius: 8px !important;
     font-weight: 700 !important;
     border: none !important;
-    transition: transform 0.2s;
+    transition: all 0.2s ease !important;
 }
 
 .stButton button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Cards / Containers */
+/* --- CONTAINERS / CARDS --- */
+/* De witte blokken waar de content in staat */
 [data-testid="stVerticalBlock"] > [style*="border"] {
     border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Iets zwaardere schaduw */
     border-radius: 12px !important;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     background-color: white;
+    padding: 1.5rem !important;
 }
 
-/* Menu verbergen */
-#MainMenu, footer, header {visibility: hidden;}
+/* --- STATUS LABELS --- */
+.status-pill {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+/* --- MENU VERBERGEN --- */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}

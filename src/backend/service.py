@@ -1,12 +1,22 @@
 import streamlit as st
 from src.backend.client import supabase
+from datetime import date # <--- NIEUW: Importeer date
 
 def get_live_events():
     try:
-        response = supabase.table("events").select("*").order("date", desc=True).execute()
+        # Haal de datum van vandaag op (YYYY-MM-DD)
+        today = date.today().isoformat()
+        
+        # Filter: Haal alles op waar datum >= vandaag
+        # We sorteren nu ook oplopend (dichtstbijzijnde event eerst)
+        response = supabase.table("events") \
+            .select("*") \
+            .gte("date", today) \
+            .order("date", desc=False) \
+            .execute()
+            
         return response.data
     except Exception as e:
-        # Tijdlijke DEBUG regel: toon de error in de app
         st.error(f"Supabase Error: {e}") 
         return []
 
@@ -18,7 +28,6 @@ def get_user_votes(user_id):
         return []
 
 def vote_for_event(user_id, event_id, choice):
-    # Gooit een error als het mislukt, die vangen we in de View op
     supabase.table("votes").insert({
         "user_id": user_id,
         "event_id": event_id,
@@ -32,8 +41,8 @@ def get_event_stats(event_id):
     except Exception:
         return []
 
-# Nieuwe functie voor admin later
 def create_event(date, sector, title_json, desc_json):
+    # Hier voegen we het event toe aan de DB
     supabase.table("events").insert({
         "date": str(date),
         "sector": sector,
@@ -41,8 +50,6 @@ def create_event(date, sector, title_json, desc_json):
         "description": desc_json
     }).execute()
 
-
-    # ... (Bestaande imports zoals supabase)
 
 
 def login_user(email, password):
