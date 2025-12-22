@@ -1,7 +1,6 @@
 import streamlit as st
 from src.utils.text import get_text
 from src.backend.service import get_live_events, get_user_votes
-from src.utils.ui import load_custom_css
 from PIL import Image # <--- VOEG DIT TOE bovenaan bij je imports
 
 

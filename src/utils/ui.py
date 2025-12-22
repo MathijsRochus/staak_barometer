@@ -1,19 +1,61 @@
+# Bestandsnaam: src/utils/ui.py
 import streamlit as st
+import base64
 import os
 
-def load_custom_css():
-    """
-    Laadt het CSS bestand uit src/assets/style.css
-    en injecteert het in de Streamlit app.
-    """
-    # We zoeken het pad relatief aan dit bestand
-    # Pad: src/utils/ui.py -> 1 omhoog (src) -> assets -> style.css
-    css_file_path = os.path.join("src", "assets", "style.css")
-    
+def get_base64_of_bin_file(bin_file):
+    """Hulpfunctie om een afbeelding om te zetten naar base64 voor HTML."""
     try:
-        with open(css_file_path, "r") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
     except FileNotFoundError:
-        # Als het bestand niet gevonden wordt, printen we een stille warning in de console
-        # zodat de app niet crasht.
-        print(f"Let op: CSS bestand niet gevonden op: {css_file_path}")
+        return None
+
+def render_header():
+    """
+    Deze functie zorgt voor de globale styling en toont het logo
+    rechtsboven op de pagina via CSS.
+    """
+    
+    # 1. Probeer het logo te laden
+    logo_file = "logo.png"
+    logo_base64 = get_base64_of_bin_file(logo_file)
+
+    # 2. CSS Styling
+    # We voegen een container toe met 'position: fixed' om het rechtsboven te pinnen.
+    css_code = """
+    <style>
+        /* Algemene styling voor knoppen en titels */
+        .stButton button {
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Logo container styling */
+        .logo-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            width: 80px;  /* Pas de grootte hier aan */
+        }
+        
+        /* Zorg dat de header van Streamlit niet overlapt */
+        header[data-testid="stHeader"] {
+            z-index: 1;
+        }
+    </style>
+    """
+    
+    # 3. HTML voor het logo (alleen als het bestand bestaat)
+    if logo_base64:
+        logo_html = f"""
+        <div class="logo-container">
+            <img src="data:image/png;base64,{logo_base64}" style="width: 100%;">
+        </div>
+        """
+        st.markdown(css_code + logo_html, unsafe_allow_html=True)
+    else:
+        # Als er geen logo is, laden we alleen de CSS
+        st.markdown(css_code, unsafe_allow_html=True)
