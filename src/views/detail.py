@@ -1,14 +1,21 @@
 import streamlit as st
 import pandas as pd
-import altair as alt  # <--- NEW IMPORT
+import altair as alt
+from datetime import datetime, date
 from src.utils.text import get_text
 from src.backend.service import get_user_votes, vote_for_event, get_event_stats
 
-# De vote option keys
+# Define specific colors for each option to match V2 styling
+COLOR_MAP = {
+    "opt_strike_agree": "#dc2626",    # Red
+    "opt_strike_disagree": "#ea580c", # Orange
+    "opt_work_agree": "#2563eb",      # Blue
+    "opt_work_disagree": "#16a34a"    # Green
+}
+
 VOTE_KEYS = ["opt_strike_agree", "opt_strike_disagree", "opt_work_agree", "opt_work_disagree"]
 
 def render_detail():
-    # 1. security check
     event = st.session_state.get('selected_event')
     if not event:
         st.session_state.page = 'home'
@@ -18,63 +25,77 @@ def render_detail():
     lang = st.session_state.language
     user = st.session_state.user
 
-    # 2. back button
     if st.button(get_text("btn_back")):
         st.session_state.page = 'home'
         st.rerun()
 
-    # 3. Show event details
-    title = event['title'].get(lang, event['title'].get('nl'))
-    desc = event['description'].get(lang, event['description'].get('nl'))
+    # --- INFO SECTION ---
+    # Title & Desc Translation
+    title = event['title'].get(lang, event['title'].get('nl', ''))
+    desc = event['description'].get(lang, event['description'].get('nl', ''))
     
-    # Sector logic
-    raw_sector = event['sector']
-    if isinstance(raw_sector, dict):
-        sector_display = raw_sector.get(lang, raw_sector.get('nl', ''))
-    else:
-        sector_display = str(raw_sector)
+    # Sector Translation (Fix for JSON regression)
+    sector = event['sector']
+    if isinstance(sector, dict):
+        sector = sector.get(lang, sector.get('nl', ''))
 
     st.title(title)
-    st.markdown(f"**{get_text('lbl_date')}:** {event['date']} | **{get_text('lbl_sector')}:** {sector_display}")
+    st.markdown(f"**{get_text('lbl_date')}:** {event['date']} | **{get_text('lbl_sector')}:** {sector}")
     st.info(desc)
-    
     st.divider()
 
-    # 4. vote logic
-    st.subheader(get_text("header_position"))
-    st.write(get_text("desc_position"))
+    # --- DATE CHECK ---
+    try:
+        e_date = datetime.strptime(event['date'], '%Y-%m-%d').date()
+        is_past = e_date < date.today()
+    except:
+        is_past = False
 
-    # fetch current user's votes
     my_votes = get_user_votes(user.id)
     current_choice = next((v['choice'] for v in my_votes if v['event_id'] == event['id']), None)
 
-    options_map = {k: get_text(k) for k in VOTE_KEYS}
-    reverse_map = {v: k for k, v in options_map.items()}
-
-    index = 0
-    if current_choice and current_choice in VOTE_KEYS:
-        index = VOTE_KEYS.index(current_choice)
-        st.success(get_text("status_voted"))
-
-    with st.form("voting_form"):
-        selection_label = st.radio("Keuze", list(options_map.values()), index=index)
-        submitted = st.form_submit_button(get_text("btn_confirm"))
+    # --- INTERFACE ---
+    if is_past:
+        st.warning(get_text("status_closed"))
+        if current_choice:
+            st.write(f"Your vote: **{get_text(current_choice)}**")
         
-        if submitted:
-            selected_key = reverse_map[selection_label]
-            try:
-                vote_for_event(user.id, event['id'], selected_key)
-                st.success(get_text("success_vote"))
-                st.rerun()
-            except Exception as e:
-                if "duplicate key" in str(e) or "violates unique constraint" in str(e):
-                    st.error(get_text("error_vote_exists"))
-                else:
-                    st.error(f"Fout: {e}")
-
-    # 5. Show bar chart when voted
-    if current_choice:
+        # Always show chart for past events
         render_chart(event['id'])
+        
+    else:
+        # Active Event
+        st.subheader(get_text("header_position"))
+        
+        options_map = {k: get_text(k) for k in VOTE_KEYS}
+        reverse_map = {v: k for k, v in options_map.items()}
+        
+        index = 0
+        if current_choice and current_choice in VOTE_KEYS:
+            index = VOTE_KEYS.index(current_choice)
+            st.success(get_text("status_voted"))
+
+        with st.form("voting_form"):
+            selection_label = st.radio("Keuze", list(options_map.values()), index=index)
+            submitted = st.form_submit_button(get_text("btn_confirm"))
+            
+            if submitted:
+                selected_key = reverse_map[selection_label]
+                try:
+                    vote_for_event(user.id, event['id'], selected_key)
+                    st.success(get_text("success_vote"))
+                    st.rerun()
+                except Exception as e:
+                    if "Voting is closed" in str(e):
+                        st.error(get_text("err_voting_closed"))
+                    elif "duplicate key" in str(e):
+                        st.error(get_text("error_vote_exists"))
+                    else:
+                        st.error(f"Fout: {e}")
+
+        # Show chart only if voted
+        if current_choice:
+            render_chart(event['id'])
 
 def render_chart(event_id):
     """Hulpfunctie om de grafiek te tekenen met custom kleuren en labels."""

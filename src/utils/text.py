@@ -17,7 +17,7 @@ UI_TRANSLATIONS = {
         "login_warning": "Vul een email en wachtwoord in.",
         "success_vote": "Uw mening is geregistreerd! Bedankt.",
         "error_vote_exists": "U heeft al gestemd voor dit event.",
-        "header_events": "Recente Stakingsevenementen",
+        "header_events": "Toekomstige Stakingsevenementen",
         "sub_events": "Selecteer een evenement om uw mening te geven.",
         "header_position": "Wat is uw positie?",
         "desc_position": "Kies de optie die het beste bij uw situatie past:",
@@ -36,7 +36,11 @@ UI_TRANSLATIONS = {
         "msg_pwd_mismatch": "Wachtwoorden komen niet overeen.",
         "msg_reset_sent": "Indien dit adres bekend is, ontvangt u een email met instructies.",
         "lnk_forgot_pwd": "Wachtwoord vergeten?",
-        "err_login_failed": "Login mislukt. Controleer uw gegevens."
+        "err_login_failed": "Login mislukt. Controleer uw gegevens.",
+        "tab_active": "Actief",
+        "tab_archive": "Archief",
+        "status_closed": "🔒 Stemmen Gesloten",
+        "err_voting_closed": "Het is niet meer mogelijk om op dit event te stemmen."
     },
     "fr": {
         "title": "📊 Le Baromètre de Grève",
@@ -53,7 +57,7 @@ UI_TRANSLATIONS = {
         "login_warning": "Veuillez entrer un email et un mot de passe.",
         "success_vote": "Votre opinion a été enregistrée! Merci.",
         "error_vote_exists": "Vous avez déjà voté pour cet événement.",
-        "header_events": "Événements de grève récents",
+        "header_events": "Événements de grève futurs",
         "sub_events": "Sélectionnez un événement pour donner votre avis.",
         "header_position": "Quelle est votre position?",
         "desc_position": "Choisissez l'option qui correspond le mieux à votre situation:",
@@ -72,7 +76,11 @@ UI_TRANSLATIONS = {
         "msg_pwd_mismatch": "Les mots de passe ne correspondent pas.",
         "msg_reset_sent": "Si l'adresse existe, vous recevrez un email.",
         "lnk_forgot_pwd": "Mot de passe oublié ?",
-        "err_login_failed": "Échec de la connexion."
+        "err_login_failed": "Échec de la connexion.",
+        "tab_active": "Actif",
+        "tab_archive": "Archives",
+        "status_closed": "🔒 Votes Clos",
+        "err_voting_closed": "Il n'est plus possible de voter pour cet événement."
     },
     "en": {
         "title": "📊 The Strike Barometer",
@@ -89,7 +97,7 @@ UI_TRANSLATIONS = {
         "login_warning": "Please enter an email and password.",
         "success_vote": "Your opinion has been registered! Thank you.",
         "error_vote_exists": "You have already voted for this event.",
-        "header_events": "Recent Strike Events",
+        "header_events": "Future Strike Events",
         "sub_events": "Select an event to share your opinion.",
         "header_position": "What is your position?",
         "desc_position": "Choose the option that fits your situation best:",
@@ -108,7 +116,11 @@ UI_TRANSLATIONS = {
         "msg_pwd_mismatch": "Passwords do not match.",
         "msg_reset_sent": "If valid, you will receive an email.",
         "lnk_forgot_pwd": "Forgot password?",
-        "err_login_failed": "Login failed."
+        "err_login_failed": "Login failed.",
+        "tab_active": "Active",
+        "tab_archive": "Archive",
+        "status_closed": "🔒 Voting Closed",
+        "err_voting_closed": "Voting is no longer possible for this event."
     }
 }
 
