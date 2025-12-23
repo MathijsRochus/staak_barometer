@@ -15,7 +15,7 @@ def render_login():
         try:
             # AANGEPAST: We gebruiken width='stretch' in plaats van fixed width.
             # Omdat de kolom nu smal en gecentreerd is, staat het logo nu ook in het midden.
-            st.image("src/assets/logo.png", width='stretch')
+            st.image("src/assets/logo.png", width=150)
         except Exception:
             # Fallback als het plaatje ontbreekt (bv. tijdens development)
             st.markdown("<h1 style='text-align: center;'>📊</h1>", unsafe_allow_html=True)
