@@ -73,5 +73,3 @@ elif st.session_state.page == 'admin':
         render_admin()
 
 
-# Temporary debug line to see your roles
-st.write(st.session_state.user.app_metadata)
