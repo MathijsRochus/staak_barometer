@@ -138,7 +138,7 @@ def render_chart(event_id):
         )
         
         # 4. Combineer en toon
-        st.altair_chart(bars + text, use_container_width=True)
+        st.altair_chart(bars + text, width='stretch')
         
     else:
         st.write("Nog geen stemmen.")
