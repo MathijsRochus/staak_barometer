@@ -56,14 +56,22 @@ elif st.session_state.page == 'home':
 elif st.session_state.page == 'detail':
     render_detail()
     
+
 elif st.session_state.page == 'admin':
-    # Eenvoudige admin check
-    user_email = st.session_state.user.email if 'user' in st.session_state else ""
+    # 1. Get the user object
+    user = st.session_state.get('user')
     
-    # Pas dit emailadres aan naar jouw admin email
-    if user_email != "mathijs.rochus@outlook.com": 
-        st.error("Geen toegang.")
+    # 2. Check the app_metadata for the 'role'
+    # We use .get() to avoid errors if the key doesn't exist
+    is_admin = user.app_metadata.get('role') == 'admin' if user else False
+    
+    if not is_admin: 
+        st.error("Geen toegang. U heeft geen beheerdersrechten.")
         st.session_state.page = 'home'
         st.rerun()
     else:
         render_admin()
+
+
+# Temporary debug line to see your roles
+st.write(st.session_state.user.app_metadata)
