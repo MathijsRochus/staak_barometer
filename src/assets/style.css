@@ -1,23 +1,20 @@
-/* Bestandsnaam: src/assets/style.css */
-
-/* --- BRAND COLORS (Uit de HTML) --- */
+/* --- BRAND COLORS --- */
 :root {
     --color-mint: #A8E6CF; 
     --color-dark: #1a1523;
     --color-dark-light: #2d2438;
-    --bg-color: #f8fafc;        /* Lichte achtergrond zoals in HTML */
+    --bg-color: #f8fafc;
     --card-bg: #ffffff;
     --border-color: #e2e8f0;
 }
 
-/* --- APP BACKGROUND & FONTS --- */
 .stApp {
     background-color: var(--bg-color);
     font-family: 'Inter', sans-serif;
     color: var(--color-dark);
 }
 
-/* --- HEADERS (Poppins Font) --- */
+/* --- HEADERS --- */
 h1, h2, h3 {
     font-family: 'Poppins', sans-serif !important;
     color: var(--color-dark) !important;
@@ -26,33 +23,50 @@ h1, h2, h3 {
 }
 
 h1 {
-    border-bottom: none !important; /* Rode lijn weggehaald, cleanere look */
+    border-bottom: none !important;
     margin-bottom: 1rem;
+    font-size: 2.5rem !important; /* Groot op desktop */
+}
+
+/* --- MOBIELE AANPASSINGEN --- */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.8rem !important; /* Kleiner op mobiel */
+    }
+    h2 {
+        font-size: 1.4rem !important;
+    }
+    h3 {
+        font-size: 1.2rem !important;
+    }
+    
+    /* Knoppen iets compacter maken */
+    .stButton button {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
 }
 
 /* --- CARDS / CONTAINERS --- */
-/* De witte blokken met ronde hoeken */
 [data-testid="stVerticalBlock"] > [style*="border"] {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color) !important;
-    border-radius: 1rem !important; /* rounded-xl */
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); /* shadow-sm */
+    border-radius: 1rem !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     padding: 1.5rem !important;
 }
 
 /* --- BUTTONS --- */
-/* Standaard knop (Secundair in HTML: wit met rand) */
 .stButton button {
     background-color: white !important;
     color: var(--color-dark) !important;
     border: 1px solid var(--border-color) !important;
-    border-radius: 0.75rem !important; /* rounded-xl */
+    border-radius: 0.75rem !important;
     font-weight: 600 !important;
     padding: 0.5rem 1rem !important;
     transition: all 0.2s ease-in-out;
 }
 
-/* Hover effect */
 .stButton button:hover {
     border-color: var(--color-mint) !important;
     background-color: #f8fafc !important;
@@ -61,8 +75,7 @@ h1 {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* Primaire knop (Mintgroen zoals in HTML) */
-/* Gebruik in python: st.button("Tekst", type="primary") */
+/* Primary buttons */
 .stButton button[kind="primary"] {
     background-color: var(--color-mint) !important;
     color: var(--color-dark) !important;
@@ -71,12 +84,11 @@ h1 {
 }
 
 .stButton button[kind="primary"]:hover {
-    background-color: #97dcb8 !important; /* Iets donkerder mint bij hover */
+    background-color: #97dcb8 !important;
     box-shadow: 0 4px 12px rgba(168, 230, 207, 0.6);
 }
 
-/* --- STATUS PILLS --- */
-/* Voor de labels "Gestemd" etc. */
+/* --- OVERIG --- */
 .status-pill {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -84,27 +96,15 @@ h1 {
     font-weight: 700;
     border-radius: 9999px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
-.status-voted {
-    background-color: var(--color-dark);
-    color: white;
-}
+.status-voted { background-color: var(--color-dark); color: white; }
+.status-open { background-color: var(--color-mint); color: var(--color-dark); }
 
-.status-open {
-    background-color: var(--color-mint);
-    color: var(--color-dark);
-}
-
-/* --- NOTIFICATIES --- */
 .stAlert {
     background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
 }
 
-/* --- MENU VERBERGEN --- */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+#MainMenu, footer, header {visibility: hidden;}
