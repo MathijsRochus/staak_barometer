@@ -7,10 +7,10 @@ from src.backend.service import get_user_votes, vote_for_event, get_event_stats
 
 # Define specific colors for each option to match V2 styling
 COLOR_MAP = {
-    "opt_strike_agree": "#dc2626",    # Red
-    "opt_strike_disagree": "#ea580c", # Orange
-    "opt_work_agree": "#2563eb",      # Blue
-    "opt_work_disagree": "#16a34a"    # Green
+    "opt_strike_agree": "#991b1b",    # Red
+    "opt_strike_disagree": "#dc2626", # Orange
+    "opt_work_agree": "#fb923c",      # Blue
+    "opt_work_disagree": "#fed7aa"    # Green
 }
 
 VOTE_KEYS = ["opt_strike_agree", "opt_strike_disagree", "opt_work_agree", "opt_work_disagree"]
