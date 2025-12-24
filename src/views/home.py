@@ -3,7 +3,7 @@ from datetime import datetime, date
 from PIL import Image
 from src.utils.text import get_text
 # Make sure your service.py fetches ALL events for the archive to work
-from src.backend.service import get_all_events, get_user_votes 
+from src.backend.service import get_active_events, get_user_votes 
 
 def render_home():
     # --- SIDEBAR ---
@@ -36,9 +36,8 @@ def render_home():
     st.write(get_text("sub_events"))
 
     # 1. Fetch Data
-    # Note: Ensure get_live_events() in service.py does NOT filter by date, 
     # otherwise the archive will be empty.
-    all_events = get_all_events()
+    all_events = get_active_events()
     
     user_votes = []
     if 'user' in st.session_state:
